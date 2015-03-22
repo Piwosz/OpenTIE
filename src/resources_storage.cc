@@ -48,7 +48,7 @@ Storage::Storage():
 bool Storage::IsTieFileResource(const boost::filesystem::path & file) {
 	assert(!boost::filesystem::is_directory(file));
 	static std::set<std::string> available = {
-			".LFD", ".GND"
+			".LFD", ".GND",
 	};
 	return available.count(file.extension().string());
 }
@@ -110,7 +110,6 @@ void Storage::BuildIndexFromFile(const boost::filesystem::path & file) {
 				virtual_path,
 				{nullptr, offset, head.length}
 		);
-
 	}
 }
 
@@ -134,8 +133,6 @@ void Storage::LoadTieDirectory(const std::string & directory) {
 	std::cout << "Loaded containers: "
 			<< std::dec << registered_containers_.size() << std::endl;
 
-//	for (auto container = registered_containers_.begin();
-//			container != registered_containers_.end(); ++container) {
 	for (const auto & container : registered_containers_) {
 		if (!container.second) continue;
 		std::cout << "Container: 0x"
